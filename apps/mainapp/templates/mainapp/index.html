@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Login | Registration</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'style.css' %}" />
+</head>
+<body>
+    <h1>Welcome to Orlov's Travel agency</h1>
+    <div class='registration'>
+        <h2>Registration</h2>
+        <form action="{% url 'users:createuser' %}" method="POST">
+            {% csrf_token %}
+            <p>Name:<br><input type="text" name="name"></p>
+            <p>Username:<br><input type="text" name="user_name"></p>
+            <p>Password:<br><input type="password" name="password"></p>
+            <p>Password confirmation:<br><input type="password" name="password_conf"></p>
+            <p><input type="submit" value="Register" class='button'></p>
+        </form>
+    </div>
+
+    <div class="login">
+        <h2>Login</h2>
+        <form action="{% url 'users:login' %}" method="POST">
+                {% csrf_token %}
+                <p>Username:<br><input type="text" name="user_name"></p>
+                <p>Password:<br><input type="password" name="password"></p>
+                <p><input type="submit" value="Login" class='button'></p>
+        </form>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <h3>{{ message }}</h3>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
